@@ -1,0 +1,10 @@
+
+
+
+<div> 
+    {{form.media}}
+    <form method = 'post', action="" enctype="multipart/form-data">
+        {% csrf_token %}
+        {{form.as_p}}
+    </form>
+</div>

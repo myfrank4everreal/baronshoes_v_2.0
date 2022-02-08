@@ -1,11 +1,13 @@
 
 from django.shortcuts import render, redirect, get_object_or_404
+from django.urls import reverse
 from .models import Blog, Post, Comment
 from django.db.models import Q
 from django.db.models import Count
 from account.models import SignUp
-from .forms import CommentForm
+from .forms import CommentForm, PostForm
 from django.contrib.auth.models import User
+
 
 
 from django.core.paginator import Paginator, PageNotAnInteger, EmptyPage
@@ -124,3 +126,17 @@ def all_blog(request):
             }
     
     return render(request, 'blog/blogview.html', context)
+
+
+
+def createpost(request):
+    form = PostForm()
+    if request.method == "POST":
+        form = PostForm(request.POST or request.FILE)
+        if form.is_valid():
+            form.save()
+            return redirect(reverse('post', kwargs={'id':form.instance.id}))
+    
+    context = {'form':form}
+        
+    return render(request, 'blog/updatepost.html', context)

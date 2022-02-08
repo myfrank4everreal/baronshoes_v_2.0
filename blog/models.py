@@ -1,5 +1,6 @@
 from django.db import models
 from django.contrib.auth.models import User 
+from tinymce import HTMLField
 
 
 
@@ -33,6 +34,7 @@ class Post(models.Model):
     headline = models.CharField(max_length=300)
     thumbnail = models.ImageField(blank=True, null=True)
     bodytext = models.TextField()
+    content = HTMLField('content')
     pub_date = models.DateTimeField(auto_now_add=True)
     category = models.ManyToManyField(Category)
     featured = models.BooleanField(default=False, blank=True, null=True)
