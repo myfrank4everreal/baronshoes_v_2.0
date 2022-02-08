@@ -1,0 +1,10 @@
+{% extends 'base.html' %}
+
+
+{% block content %}
+
+{% for query in queryset %}
+    {{query}}
+{% endfor %}
+
+{% endblock %}
