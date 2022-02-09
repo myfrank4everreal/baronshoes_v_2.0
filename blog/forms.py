@@ -1,6 +1,6 @@
 from django import forms 
 from .models import Comment
-from django.forms import Textarea
+from django.forms import TextInput, Textarea
 from tinymce import TinyMCE
 from .models import Post
 
@@ -37,7 +37,31 @@ class PostForm(forms.ModelForm):
 
     class Meta:
         model = Post
-        fields = '__all__'
+        fields = ['blog', 'headline', 'thumbnail', 'bodytext', 'content', 'category']
+        
+        widgets={
+            'headline':TextInput(attrs={
+            
+            'type':'text',
+            'class':'form-control',
+            'name':'headline',
+            'placeholder':'Headline'
+        }),
+            'bodytext':Textarea(attrs={
+            'rows':5,
+            'type':'text',
+            'class':'form-control mb-5',
+            'name':'headline',
+            'placeholder':'Headline'
+        }),
+            'content':TextInput(attrs={
+            'rows':5,
+            'type':'text',
+            'class':'form-control mb-5',
+            'name':'headline',
+            'placeholder':'Content'
+        }),
+            }
   
         
 

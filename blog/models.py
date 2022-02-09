@@ -38,8 +38,11 @@ class Post(models.Model):
     pub_date = models.DateTimeField(auto_now_add=True)
     category = models.ManyToManyField(Category)
     featured = models.BooleanField(default=False, blank=True, null=True)
-    viewcount = models.IntegerField()
+    # viewcount = models.IntegerField()
     author = models.ForeignKey(Author, on_delete=models.CASCADE)
+    prevpost = models.ForeignKey('self', related_name='previous_post', on_delete=models.SET_NULL, blank=True, null=True )
+    nextpost = models.ForeignKey('self', related_name='next_post', on_delete=models.SET_NULL, blank=True, null=True )
+    
     
     def __str__(self):
         return self.headline
