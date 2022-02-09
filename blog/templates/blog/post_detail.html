@@ -32,8 +32,11 @@
                         <div class="col-lg-12">
                             <div class="feature-img">
                                 <div>
-                                     <a class="mb-5" href="{% url 'create-post'%}" ><button class='btn-primary mb-8 mt-8'>Creat Post</button></a> 
-                                
+                                    {% if request.user.author %}
+                                                                 
+                                    <span>  <a class="mb-5" href="{% url 'create-post' %}" ><button class='primary-btn mb-8 mt-8'>Creat Post</button></a> </span>
+                                     <span><a class="mb-5" href="{% url 'update-post' post.id %}" ><button class='primary-btn mb-8 mt-8'>Udate Post</button></a> </span>
+                                    {% endif %}
                                 </div>
                                 <img class="img-fluid" src="{{ post.thumbnail.url }}" alt="">
                             </div>
@@ -87,6 +90,9 @@
                                 <div class="col-lg-12 mt-25">
                                     <p>
                                        {% comment %}  this is where the content is gonna come in {% endcomment %}
+                                       
+                                       {{post.content|safe}}
+                                       
                                     </p>
                                     <p>
                                         MCSE boot camps have its supporters and its detractors. Some people do not
@@ -222,7 +228,7 @@
                                         {% if comment_item.user.author %}
                                         <img src="{{ post.author.profile_image.url }}" alt="">
                                         {% else %}
-                                        <img src="{% static 'mysite/img/blog/c5.jpg' %}" alt="">
+                                        <img style="width:30px; height:40px;"src="{% static 'mysite/img/avata.png' %}" alt="">
                                         {% endif %}
                                     </div>
                                     <div class="desc">

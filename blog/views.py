@@ -1,7 +1,8 @@
 
+from django.http import HttpResponseRedirect
 from django.shortcuts import render, redirect, get_object_or_404
 from django.urls import reverse
-from .models import Blog, Post, Comment
+from .models import Blog, Post, Comment, Author
 from django.db.models import Q
 from django.db.models import Count
 from account.models import SignUp
@@ -27,8 +28,15 @@ def search_blog(request):
         return render(request, 'blog/search_result.html', context)
     else:
         pass
+# here i want to get the author for the post 
+def get_author(user):
+    author = Author.objects.filter(user=user)
+    if author.exists:
+        return author[0]
+    else:
+        return None
+        
     
-
         
     
 def get_category():
@@ -130,13 +138,52 @@ def all_blog(request):
 
 
 def createpost(request):
-    form = PostForm()
-    if request.method == "POST":
-        form = PostForm(request.POST or request.FILE)
-        if form.is_valid():
-            form.save()
-            return redirect(reverse('post', kwargs={'id':form.instance.id}))
+    author = get_author(request.user)
+    title="Create Post"
     
-    context = {'form':form}
+    form = PostForm(request.POST or None, request.FILES or None)
+    
+    if request.method == "POST":
+        if form.is_valid():
+            form.instance.author = author
+            form.save()
+            return redirect(reverse('post-detail', kwargs={'id':form.instance.id}))
+    
+    context = {
+                'form':form, 
+                'author':author,
+                'title':title,
+               }
         
+    return render(request, 'blog/updatepost.html', context)
+
+
+    
+
+def updatepost(request, id):
+    title= 'updatepost'
+    
+    author = get_author(request.user)
+    post = get_object_or_404(Post, id=id)  
+    
+    form = PostForm(request.POST or None, request.FILES  or None, instance = post )
+    if request.method == "POST":
+        form = PostForm(request.POST, instance=post)
+        
+        form.instance.author = author
+        if form.is_valid():
+            if form.instance.thumbnail == None:
+                thumbnail = post.thumbnail
+                form.instance.thumbnail = thumbnail
+            else:
+                print(post.thumbnail)
+            form.save()
+                               
+                
+            
+        
+            return HttpResponseRedirect(reverse('post-detail', kwargs={'id':form.instance.id}))
+    context = {'form':form,
+               'title':title,
+               'author':author,}
     return render(request, 'blog/updatepost.html', context)
