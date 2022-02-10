@@ -42,7 +42,7 @@ def get_author(user):
 def get_category():
     # queryset = Post.objects.all()
     category = Post.objects.values('category__name').annotate(Count('category__name')) 
-    print(category)
+    
     return category
     
 def blogview(request):
