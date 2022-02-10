@@ -1,0 +1,4 @@
+Django==3.2.12
+django_heroku==0.3.1
+python-decouple==3.6
+python-dotenv==0.19.2
