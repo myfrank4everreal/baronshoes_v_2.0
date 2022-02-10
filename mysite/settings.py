@@ -13,7 +13,9 @@ https://docs.djangoproject.com/en/3.2/ref/settings/
 from pathlib import Path
 import os
 
-
+# for the heroku :
+import django_heroku
+from decouple import config
 # Load .env file using:
 from dotenv import load_dotenv
 load_dotenv()
@@ -59,6 +61,9 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    # for heroku
+    'whitenoise.middleware.WhiteNoiseMiddleware',
+    
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -99,6 +104,10 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+# for heroku
+db_from_env = dj_database_url.config()
+DATABASES['default'].update(db_from_env)
 
 # for the tinymce editor
 TINYMCE_DEFAULT_CONFIG = {
@@ -183,6 +192,11 @@ STATICFILES_DIRS = [
 
 FILEBROWSER_DIRECTORY = ''
 DIRECTORY = ''
+
+# for heroku
+'whitenoise.storage.CompressedManifestStaticFilesStorage'
+django_heroku.settings(locals())
+
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
