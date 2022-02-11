@@ -115,13 +115,13 @@ DATABASES = {
         'NAME': 'dfbcmi6eslnqqv',
         'USER': 'jymuhheqkxltxr',
         'PASSWORD': '9f13271856045b47c8d7d02a50d0e6aef03a03294c381c527aca28fe49c3d95c',
-        'HOST': 'ec2-3-232-22-121.compute-1.amazonaws.com'
+        'HOST': 'ec2-3-232-22-121.compute-1.amazonaws.com',
     }
 }
 
 
-# db_from_env = dj_database_url.config()
-# DATABASES['default'].update(db_from_env)
+db_from_env = dj_database_url.config()
+DATABASES['default'].update(db_from_env)
 
 # for heroku
 # update heroku database from local
