@@ -104,7 +104,7 @@
                             </div>
                             <div class="col-md-9">
                                 <div class="blog_post">
-                                    <img src="{{post.thumbnail.url}}" alt="">
+                                    <img src="{{post.get_thumbnail}}" alt="">
                                     <div class="blog_details">
                                         <a href="{% url 'post-detail' post.id %}">
                                             <h2>{{post.headline}}</h2>

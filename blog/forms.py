@@ -52,7 +52,7 @@ class PostForm(forms.ModelForm):
             'type':'text',
             'class':'form-control mb-5',
             'name':'headline',
-            'placeholder':'Headline'
+            'placeholder':'Description'
         }),
             'content':TextInput(attrs={
             'rows':5,

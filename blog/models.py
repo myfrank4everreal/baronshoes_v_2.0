@@ -47,6 +47,14 @@ class Post(models.Model):
     def __str__(self):
         return self.headline
     
+    
+    @property
+    def get_thumbnail(self):
+        if self.thumbnail and hasattr(self.thumbnail, 'url'):
+            return self.thumbnail.url
+        else:
+            return "static/mysite/img/blog/add.jpg"
+        # C:\Users\hp\Desktop\mydev\webdev2\djangoprojects\projects\baronshoes\mysite\mysite\static\mysite\img\blog\add.jpg
     # def get_comment(self):
     #     return self.comment_set.all()
     

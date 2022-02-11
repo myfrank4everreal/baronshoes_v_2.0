@@ -158,6 +158,8 @@ TINYMCE_DEFAULT_CONFIG = {
     'statusbar': True,
     }
 
+SITE_ID = 1
+
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
 
@@ -213,7 +215,7 @@ FILEBROWSER_DIRECTORY = ''
 DIRECTORY = ''
 
 # for heroku
-'whitenoise.storage.CompressedManifestStaticFilesStorage'
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 django_heroku.settings(locals())
 
 

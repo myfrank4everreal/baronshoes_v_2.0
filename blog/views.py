@@ -161,29 +161,27 @@ def createpost(request):
     
 
 def updatepost(request, id):
-    title= 'updatepost'
+    pass
+    # title= 'updatepost'
     
-    author = get_author(request.user)
-    post = get_object_or_404(Post, id=id)  
+    # author = get_author(request.user)
+    # post = get_object_or_404(Post, id=id)  
     
-    form = PostForm(request.POST or None, request.FILES  or None, instance = post )
-    if request.method == "POST":
-        form = PostForm(request.POST, instance=post)
+    # form = PostForm(request.POST or None, request.FILES  or None, instance = post )
+    # if request.method == "POST":
+    #     form = PostForm(request.POST, instance=post)
         
-        form.instance.author = author
-        if form.is_valid():
-            if form.instance.thumbnail == None:
-                thumbnail = post.thumbnail
-                form.instance.thumbnail = thumbnail
-            else:
-                print(post.thumbnail)
-            form.save()
-                               
-                
-            
-        
-            return HttpResponseRedirect(reverse('post-detail', kwargs={'id':form.instance.id}))
-    context = {'form':form,
-               'title':title,
-               'author':author,}
-    return render(request, 'blog/updatepost.html', context)
+    #     form.instance.author = author
+    #     if form.is_valid():
+    #         if form.instance.thumbnail == None:
+    #             thumbnail = post.thumbnail
+    #             form.instance.thumbnail = thumbnail
+    #         else:
+    #             print(post.thumbnail)
+    #         form.save()
+
+    #         return HttpResponseRedirect(reverse('post-detail', kwargs={'id':form.instance.id}))
+    # context = {'form':form,
+    #            'title':title,
+    #            'author':author,}
+    # return render(request, 'blog/updatepost.html', context)
