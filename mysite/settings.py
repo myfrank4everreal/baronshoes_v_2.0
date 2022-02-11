@@ -102,16 +102,31 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
+# DATABASES = {
+#     'default': {
+#         'ENGINE': 'django.db.backends.sqlite3',
+#         'NAME': BASE_DIR / 'db.sqlite3',
+#     }
+# }
+
 DATABASES = {
     'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
+        'ENGINE': 'django.db.backends.postgresql',
+        'NAME': 'dfbcmi6eslnqqv',
+        'USER': 'jymuhheqkxltxr',
+        'PASSWORD': '9f13271856045b47c8d7d02a50d0e6aef03a03294c381c527aca28fe49c3d95c',
+        'HOST': 'ec2-3-232-22-121.compute-1.amazonaws.com'
     }
 }
 
+
+# db_from_env = dj_database_url.config()
+# DATABASES['default'].update(db_from_env)
+
 # for heroku
-db_from_env = dj_database_url.config()
-DATABASES['default'].update(db_from_env)
+# update heroku database from local
+# db_from_env = dj_database_url.config()
+# DATABASES['default'].update(db_from_env)
 
 # for the tinymce editor
 TINYMCE_DEFAULT_CONFIG = {
