@@ -30,7 +30,7 @@
             <h3 class="widget_title">Recent Posts</h3>
             {% if post %}
             <div class="media post_item">
-                <img style="height:50px; width:80px;"  src="{{post.thumbnail.url}}" alt="post">
+                <img style="height:50px; width:80px;"  src="{{post.get_thumbnail}}" alt="post">
                 <div class="media-body">
                     <a href="blog-details.html">
                         <h3>{{post.headline}}</h3>
@@ -47,7 +47,7 @@
                     <a href="blog-details.html">
                         <h3>{{post.headline}}</h3>
                     </a>
-                    <p>{{post.bodytext}}</p>
+                    <p>{{post.shotend_bodytext}}</p>
                 </div>
             </div>
             {% endfor %}

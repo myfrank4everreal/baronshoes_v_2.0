@@ -52,6 +52,8 @@ INSTALLED_APPS = [
     'django.contrib.messages',
     'django.contrib.staticfiles',
     
+    # for the AWS : 'storages',
+    
     'blog',
     'account',
     
@@ -218,6 +220,24 @@ DIRECTORY = ''
 STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
 django_heroku.settings(locals())
 
+
+#  this is for AWS boto3 storage system
+AWS_ACCESS_KEY_ID = "AKIA235CREQF562NKA2D"
+AWS_SECRET_ACCESS_KEY = "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"
+AWS_STORAGE_BUCKET_NAME  = "debaron"
+
+# for django storages settings
+
+AWS_S3_FILE_OVERWRITE = False
+AWS_DEFAULT_ACL = None
+
+DEFAULT_FILE_STORAGE= 'storages.backends.s3boto3.S3Boto3Storage'
+# STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+
+AWS_S3_HOST = 'us-east-2.amazonaws.com'
+AWS_S3_REGION_NAME = 'us-east-2'
+
+AWS_S3_SIGNATURE_VERSION = 's3v4'
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field

@@ -47,6 +47,9 @@ class Post(models.Model):
     def __str__(self):
         return self.headline
     
+    def shotend_bodytext(self):
+        return self.bodytext[:200] + '...'
+    
     
     @property
     def get_thumbnail(self):
