@@ -228,7 +228,7 @@ AWS_DEFAULT_ACL = None
 
 DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
 # STATICFILES_STORAGE
-DEFAULT_FILE_STORAGE = 'mysite.storage_backends.MediaStorage'
+# DEFAULT_FILE_STORAGE = 'mysite.storage_backends.MediaStorage'
 # to be able to store media file uploaded by users we need to do this 
 # create a new folder file called storage_backends.py
 
