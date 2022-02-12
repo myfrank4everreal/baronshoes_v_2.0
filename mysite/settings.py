@@ -216,9 +216,7 @@ STATICFILES_DIRS = [
 FILEBROWSER_DIRECTORY = ''
 DIRECTORY = ''
 
-# for heroku
-STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
-django_heroku.settings(locals())
+
 
 
 #  this is for AWS boto3 storage system
@@ -231,9 +229,9 @@ AWS_STORAGE_BUCKET_NAME  = "debaron"
 AWS_S3_FILE_OVERWRITE = False
 AWS_DEFAULT_ACL = None
 
-STATICFILES_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
-
-DEFAULT_FILE_STORAGE = 'mysite.storage_backends.MediaStorage'
+DEFAULT_FILE_STORAGE = 'storages.backends.s3boto3.S3Boto3Storage'
+# STATICFILES_STORAGE
+# DEFAULT_FILE_STORAGE = 'mysite.storage_backends.MediaStorage'
 # to be able to store media file uploaded by users we need to do this 
 # create a new folder file called storage_backends.py
 
@@ -241,6 +239,10 @@ AWS_S3_HOST = 'us-east-2.amazonaws.com'
 AWS_S3_REGION_NAME = 'us-east-2'
 
 AWS_S3_SIGNATURE_VERSION = 's3v4'
+
+# for heroku
+STATICFILES_STORAGE = 'whitenoise.storage.CompressedManifestStaticFilesStorage'
+django_heroku.settings(locals())
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/3.2/ref/settings/#default-auto-field
