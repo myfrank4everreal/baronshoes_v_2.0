@@ -48,20 +48,18 @@ def get_category():
 def blogview(request):
     title = 'blogview'
     category_count = get_category()
+    featuredpost = Post.objects.filter(featured=True)
+    
     print(category_count)
     title = 'Featured Blogs'
     bloglist = Blog.objects.all()
-    recentpost = Post.objects.order_by('-pub_date')[:3]
-    featuredpost = Post.objects.order_by('featured')
+    recentpost = Post.objects.order_by('-pub_date')[:8]
+    
     
    
     # for the newsletter subscription 
-
-  
-    
     context={
         'title':title,
-        'category_count':category_count,
         'bloglist':bloglist, 
         'featuredpost':featuredpost,
         'recentpost':recentpost,
@@ -72,14 +70,15 @@ def blogview(request):
 
 # def get_user():
 #     user = User.objects.filter(user=user)
+
     
 
 def post_detail(request, id=id):
-    
-    
-    
+    featuredpost = Post.objects.filter(featured=True)
     category_count = get_category()
+    
     post = get_object_or_404(Post, id=id)
+    
  
     comment_count = post.comment_set.count()
     
@@ -96,13 +95,21 @@ def post_detail(request, id=id):
         'comment_count':comment_count,
         'post':post,
         'commentform':commentform,
-        'category_count':category_count
+        'category_count':category_count,
+        'featuredpost':featuredpost,
                }
     return render(request, 'blog/post_detail.html', context)
 
 def blog_post(request, id):
+    featuredpost = Post.objects.filter(featured=True)
+    category_count = get_category()
+    
+    
     blog_post_queryset = get_object_or_404(Blog, id = id)
-    context = {'queryset' : blog_post_queryset}
+    context = {'queryset' : blog_post_queryset,
+               'category_count':category_count,
+               'featuredpost':featuredpost,
+               }
     return render(request, 'blog/blogpost.html', context)
 
 def all_blog(request):
@@ -111,8 +118,9 @@ def all_blog(request):
     
      # for the pagination of blog home
     postlist = Post.objects.all()
-     
-    paginator = Paginator(postlist, 2)
+    featuredpost = Post.objects.filter(featured=True)
+    
+    paginator = Paginator(postlist, 5)
     page_request_var = 'page'
     page = request.GET.get(page_request_var)
     try:
@@ -121,12 +129,10 @@ def all_blog(request):
         paginated_queryset = paginator.page(1)
     except EmptyPage:
         paginated_queryset = paginator.page(paginator.num_pages) 
-        
-    
-  
-    
+           
     context = {
         'category_count':category_count,
+        'featuredpost':featuredpost,
         
         'title':title,
         'queryset':paginated_queryset,
@@ -161,27 +167,26 @@ def createpost(request):
     
 
 def updatepost(request, id):
-    pass
-    # title= 'updatepost'
+    title= 'updatepost'
     
-    # author = get_author(request.user)
-    # post = get_object_or_404(Post, id=id)  
+    author = get_author(request.user)
+    post = get_object_or_404(Post, id=id)  
     
-    # form = PostForm(request.POST or None, request.FILES  or None, instance = post )
-    # if request.method == "POST":
-    #     form = PostForm(request.POST, instance=post)
+    form = PostForm(request.POST or None, request.FILES  or None, instance = post )
+    if request.method == "POST":
+        form = PostForm(request.POST, instance=post)
         
-    #     form.instance.author = author
-    #     if form.is_valid():
-    #         if form.instance.thumbnail == None:
-    #             thumbnail = post.thumbnail
-    #             form.instance.thumbnail = thumbnail
-    #         else:
-    #             print(post.thumbnail)
-    #         form.save()
+        form.instance.author = author
+        if form.is_valid():
+            if form.instance.thumbnail == None:
+                thumbnail = post.thumbnail
+                form.instance.thumbnail = thumbnail
+            else:
+                print(post.thumbnail)
+            form.save()
 
-    #         return HttpResponseRedirect(reverse('post-detail', kwargs={'id':form.instance.id}))
-    # context = {'form':form,
-    #            'title':title,
-    #            'author':author,}
-    # return render(request, 'blog/updatepost.html', context)
+            return HttpResponseRedirect(reverse('post-detail', kwargs={'id':form.instance.id}))
+    context = {'form':form,
+               'title':title,
+               'author':author,}
+    return render(request, 'blog/updatepost.html', context)

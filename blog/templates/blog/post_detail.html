@@ -13,8 +13,8 @@
                 <div class="col-first">
                     <h1>Blog Page</h1>
                     <nav class="d-flex align-items-center">
-                        <a href="index.html">Home<span class="lnr lnr-arrow-right"></span></a>
-                        <a href="category.html">Blog</a>
+                        <a href="{% url 'blogview' %}">Home<span class="lnr lnr-arrow-right"></span></a>
+                        <a href="">Blog</a>
                     </nav>
                 </div>
             </div>
@@ -38,7 +38,7 @@
                                      <span><a class="mb-5" href="{% url 'update-post' post.id %}" ><button class='primary-btn mb-8 mt-8'>Udate Post</button></a> </span>
                                     {% endif %}
                                 </div>
-                                <img class="img-fluid" src="{{ get_thumbnail }}" alt="">
+                                <img class="img-fluid" src="{{ post.get_thumbnail }}" alt="">
                             </div>
                         </div>
                         <div class="col-lg-3  col-md-3">
@@ -114,18 +114,22 @@
                                     <a href="#"><span class="lnr text-white lnr-arrow-left"></span></a>
                                 </div>
                                 <div class="detials">
+                                    {% if post.prevpost %}
                                     <p>Prev Post</p>
-                                    <a href="#">
-                                        <h4>Space The Final Frontier</h4>
+                                    <a href="{% url 'post-detail' post.prevpost.id %}">
+                                        <h4>{{post.prevpost}}</h4>
                                     </a>
+                                    {% endif %}
                                 </div>
                             </div>
                             <div class="col-lg-6 col-md-6 col-12 nav-right flex-row d-flex justify-content-end align-items-center">
                                 <div class="detials">
+                                    {% if post.nextpost %}
                                     <p>Next Post</p>
-                                    <a href="#">
-                                        <h4>Telescopes 101</h4>
+                                    <a href="{% url 'post-detail' post.nextpost.id %}">
+                                        <h4>{{post.nextpost}}</h4>
                                     </a>
+                                    {% endif %}
                                 </div>
                                 <div class="arrow">
                                     <a href="#"><span class="lnr text-white lnr-arrow-right"></span></a>

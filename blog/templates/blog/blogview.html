@@ -12,9 +12,9 @@
                     <nav class="d-flex align-items-center">
                         <a href="{% url 'blogview' %}">Home<span class="lnr lnr-arrow-right"></span></a>
                         {% if title == 'all-blog' %}
-                            <a href="{% url 'blogview' %}">Recent Blog Post</a>
+                            <a href="{% url 'blogview' %}">Featured Blog</a>
                         {% else %}
-                            <a href="{% url 'all-blog' %}">All Blog Post</a>
+                            <a href="{% url 'all-blog' %}">View All Blog</a>
                         {% endif %}
                     </nav>
                 </div>
@@ -98,7 +98,7 @@
                                         <li><a href="#">{{post.author.user.username}}<i class="lnr lnr-user"></i></a></li>
                                         <li><a href="#">{{post.pub_date}}<i class="lnr lnr-calendar-full"></i></a></li>
                                         <li><a href="#">1.2M Views<i class="lnr lnr-eye"></i></a></li>
-                                        <li><a href="#">06 Comments<i class="lnr lnr-bubble"></i></a></li>
+                                        <li><a href="#">{{post.get_comment_count}} comments<i class="lnr lnr-bubble"></i></a></li>
                                     </ul>
                                 </div>
                             </div>
@@ -133,7 +133,7 @@
                                         <li><a href="#">{{post.author.user.username}}<i class="lnr lnr-user"></i></a></li>
                                         <li><a href="#">{{post.pub_date}}<i class="lnr lnr-calendar-full"></i></a></li>
                                         <li><a href="#">1.2M Views<i class="lnr lnr-eye"></i></a></li>
-                                        <li><a href="#">06 Comments<i class="lnr lnr-bubble"></i></a></li>
+                                        <li><a href="#">{{post.get_comment_count}} comments<i class="lnr lnr-bubble"></i></a></li>
                                     </ul>
                                 </div>
                             </div>

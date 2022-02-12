@@ -50,6 +50,10 @@ class Post(models.Model):
     def shotend_bodytext(self):
         return self.bodytext[:200] + '...'
     
+    @property
+    def get_comment_count(self):
+        return self.comment_set.count()
+    
     
     @property
     def get_thumbnail(self):
@@ -57,12 +61,15 @@ class Post(models.Model):
             return self.thumbnail.url
         else:
             return "static/mysite/img/blog/add.jpg"
-        # C:\Users\hp\Desktop\mydev\webdev2\djangoprojects\projects\baronshoes\mysite\mysite\static\mysite\img\blog\add.jpg
-    # def get_comment(self):
-    #     return self.comment_set.all()
     
     
-
+    def get_next_post(self):
+        return self.nextpost
+    
+    def get_next_post(self):
+        return self.prevpost
+    
+    
 class Comment(models.Model):
     user = models.ForeignKey(User, on_delete=models.CASCADE)
     post = models.ForeignKey(Post, on_delete=models.CASCADE)

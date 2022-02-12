@@ -28,7 +28,7 @@
         </aside>
         <aside class="single_sidebar_widget popular_post_widget">
             <h3 class="widget_title">Recent Posts</h3>
-            {% if post %}
+            {% comment %} {% if post %}
             <div class="media post_item">
                 <img style="height:50px; width:80px;"  src="{{post.get_thumbnail}}" alt="post">
                 <div class="media-body">
@@ -39,19 +39,19 @@
                 </div>
             </div>
             
-            {% else %}
+            {% else %} {% endcomment %}
             {% for post in featuredpost %}
             <div class="media post_item">
                 <img style="height:50px; width:80px;"  src="{{post.get_thumbnail}}" alt="post">
                 <div class="media-body">
-                    <a href="blog-details.html">
+                    <a href="{% url 'post-detail' post.id %}">
                         <h3>{{post.headline}}</h3>
                     </a>
                     <p>{{post.shotend_bodytext}}</p>
                 </div>
             </div>
             {% endfor %}
-            {% endif %}
+            
             
         </aside>
         <aside class="single_sidebar_widget ads_widget">
