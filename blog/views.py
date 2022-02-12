@@ -32,7 +32,10 @@ def search_blog(request):
 def get_author(user):
     author = Author.objects.filter(user=user)
     if author.exists:
-        return author[0]
+        for i in author:
+            if len(i) >= 1 :
+                return author[0]
+        
     else:
         return None
         
