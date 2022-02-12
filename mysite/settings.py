@@ -107,13 +107,15 @@ WSGI_APPLICATION = 'mysite.wsgi.application'
 #         'NAME': BASE_DIR / 'db.sqlite3',
 #     }
 # }
+USER = os.environ.get('USER')
+PASSWORD = os.environ.get('PASSWORD')
 
 DATABASES = {
     'default': {
         'ENGINE': 'django.db.backends.postgresql',
         'NAME': 'dfbcmi6eslnqqv',
-        'USER': 'jymuhheqkxltxr',
-        'PASSWORD': '9f13271856045b47c8d7d02a50d0e6aef03a03294c381c527aca28fe49c3d95c',
+        'USER': '{USER}',
+        'PASSWORD': '{PASSWORD}',
         'HOST': 'ec2-3-232-22-121.compute-1.amazonaws.com',
     }
 }
@@ -217,9 +219,9 @@ DIRECTORY = ''
 
 
 #  this is for AWS boto3 storage system
-AWS_ACCESS_KEY_ID = "AKIA235CREQF562NKA2D"
-AWS_SECRET_ACCESS_KEY = "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"
-AWS_STORAGE_BUCKET_NAME  = "debaron"
+AWS_ACCESS_KEY_ID = os.environ.get('AWS_ACCESS_KEY_ID')
+AWS_SECRET_ACCESS_KEY = os.environ.get('AWS_SECRET_ACCESS_KEY')
+AWS_STORAGE_BUCKET_NAME  = os.environ.get('AWS_STORAGE_BUCKET_NAME ')
 
 # for django storages settings
 
